@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Seller</h2>
+    <form id="form"action="">
+        <input id = "sname"type="text" placeholder="Enter Name">
+        <input id = "productid"type="email"  placeholder="Enter ProductId">
+        <input id = "productname"type="text"  placeholder="Enter Product Name">
+        <input id = "phoneno2"type="integer"  placeholder="Enter PhoneNo">
+        <button id  = "button2">Submit</button>
+    </form>
+    <h3 id = "h3"style="display:none">invalid phone no</h3>
+    <script >
+       
+
+       // Seller
+        const form2=document.getElementById("form")
+        const submit2=document.getElementById("button2")
+        submit2.addEventListener('click', async(e)=>
+        {
+        e.preventDefault()
+        const sname=document.getElementById("sname").value
+        const productid=document.getElementById("productid").value
+        const productname=document.getElementById("productname").value  
+        const phoneno2=document.getElementById("phoneno2").value
+        const result = await fetch ("http://localhost:3000/data2",{
+            method:'POST',
+            headers: {'Content-Type':'application/json'},
+            body:JSON.stringify({
+                sname,
+                productid,
+                productname,
+                phoneno2
+            })
+
+            })
+            if(result.ok){
+                console.log("Successful")
+            }
+            else{
+                document.getElementById("h3").style.display="block"
+                document.getElementById("phoneno2").value=""
+            }
+        })
+
+    </script>
+</body>
+</html>
